@@ -1,0 +1,105 @@
+<html>
+    <head><script src="app.js"></script></head>
+<body>
+
+<h1> vanilla js test</h1>
+<div id="parentContainer"></div>
+
+<script>
+    
+const { div, p, table, tr, th, td, button } = minivan.tags;
+
+// Example usage: Create a table with fake data
+const FakeTable = () => {
+  const tableData = [
+    { name: 'John Doe', age: 28, city: 'New York' },
+    { name: 'Jane Smith', age: 35, city: 'San Francisco' },
+    { name: 'Bob Johnson', age: 42, city: 'Los Angeles' },
+  ];
+
+  return table(
+    { attributes: { border: '1' } },
+    tr({},
+      th({}, 'Name'),
+      th({}, 'Age'),
+      th({}, 'City')
+    ),
+    ...tableData.map(row =>
+      tr({},
+        td({}, row.name),
+        td({}, '' + row.age),
+        td({}, row.city)
+      )
+    )
+  );
+};
+
+// Add the fake table to a parent container
+minivan.add('#parentContainer', FakeTable());
+
+// Example usage:
+const dynamicText = minivan.state("World");
+let dynamicCount = minivan.state(0);
+
+const incrementClickHandler = () => {
+    dynamicCount.setState(dynamicCount.getState()+1)
+    console.log("incremented  > ", dynamicCount.getState())
+};
+const decrementClickHandler = () => {
+    const val = Math.max(dynamicCount.getState()-1, 0)
+    dynamicCount.setState(val)
+    console.log("deccremented  > ", dynamicCount.getState())
+};
+
+const incrementBtnContent = () => `Increment (${dynamicCount.getState()})`;
+const decrementBtnContent = () => `Increment (${dynamicCount.getState()})`;
+const incrementBtn = button({ events: { click: incrementClickHandler } }, incrementBtnContent());
+const decrementBtn = button({ events: { click: decrementClickHandler } }, decrementBtnContent());
+
+
+minivan.add('#parentContainer', incrementBtn)
+minivan.add('#parentContainer', decrementBtn)
+// Subscribe to changes in state and update the button content
+dynamicCount.subscribe((newState) => {
+  incrementBtn.textContent = incrementBtnContent();
+  decrementBtn.textContent = decrementBtnContent();
+});
+/*
+const IncrementClick = () => {
+    const incrementClicHandler = () => {
+        console.log("incremented")
+    }
+    return button(
+        {
+            attributes: {'id': 'incrementBtn'},
+            events: {onclick: incrementClicHandler}
+        },
+        'Increment'
+        )
+}
+document.querySelector('#parentContainer').appendChild(IncrementClick());
+*/
+//minivan.add('#parentContainer', IncrementClick())
+
+/*
+const decrementClick = () => {
+    console.log("deccremented")
+}
+
+const minusBtn = button({events: {onclick: decrementClick}}, 'Decrement')
+
+minivan.add('#parentContainer', minusBtn)
+*/
+
+
+const myDiv = div({ attributes: { id: 'myDiv' } }, minivan.interpolate`Hello, ${dynamicText}!`);
+const myParagraph = p({}, 'This is a paragraph.');
+
+minivan.add('#parentContainer', myDiv);
+minivan.add('#parentContainer', myParagraph);
+
+</script>
+
+
+</body>
+</html>
