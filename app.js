@@ -87,6 +87,7 @@ const htmlTags = [
   "nav",
   "section",
   "time",
+  "hr",
 ];
 
 const tags = {};
