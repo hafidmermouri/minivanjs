@@ -12,6 +12,8 @@ To use Minivan, include the minivan.js file in your project.
 
 # Creating HTML Elements
 
+Minivan simplifies the process of creating HTML elements using a functional approach. Below are examples of creating basic elements:
+
 ## importing html tags
 
 ```js
@@ -20,7 +22,33 @@ const { div, p, table, tr, th, td, button, ... } = minivan.tags;
 
 Alternatively, you can use `minivan.tags.div` or `minivan.tags.span` ...
 
-Minivan simplifies the process of creating HTML elements using a functional approach. Below are examples of creating basic elements:
+## initializing a html tag creation:
+
+To create a new HTML element, you can use this syntax:
+
+`div(__options__, __children__)`
+
+Where `__options__` is of elements that will be used to create your html element. Options include:
+
+```json
+options: {
+  'attributes': {},
+  'styles': {},
+  'events': {},
+}
+```
+
+### Attributes:
+
+Are attributes that would be added to your HTML Tag. When it has a `class` as a key like this `element.className = value`, then it will create a class element, otherwise it will create an attribute using the key as in this example: `element.setAttribute(key, value)`
+
+### Style:
+
+Could be any css styling.
+
+### events:
+
+Will add an event listner to your html element. Please use `click` as an event name if you want to create an `onclick` event and give it a function as a callback handler.
 
 ## Creating a div:
 
