@@ -1,17 +1,98 @@
 const htmlTags = [
-  'html', 'head', 'title', 'body', 'meta', 'link', 'style', 'script', 'noscript',
-  'p', 'span', 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'strong', 'em', 'i', 'b', 'small',
-  'sub', 'sup', 'blockquote', 'q', 'abbr', 'cite', 'code', 'pre', 'ul', 'ol', 'li', 'dl', 'dt', 'dd',
-  'a', 'nav', 'bdo', 'table', 'tr', 'th', 'td', 'thead', 'tbody', 'tfoot', 'caption', 'col', 'colgroup',
-  'form', 'input', 'button', 'select', 'option', 'label', 'textarea', 'fieldset', 'legend', 'optgroup',
-  'datalist', 'keygen', 'output', 'img', 'audio', 'video', 'iframe', 'object', 'embed', 'canvas', 'svg',
-  'math', 'details', 'summary', 'menu', 'command', 'menuitem', 'article', 'aside', 'figcaption', 'figure',
-  'footer', 'header', 'main', 'mark', 'nav', 'section', 'time',
+  "html",
+  "head",
+  "title",
+  "body",
+  "meta",
+  "link",
+  "style",
+  "script",
+  "noscript",
+  "p",
+  "span",
+  "div",
+  "h1",
+  "h2",
+  "h3",
+  "h4",
+  "h5",
+  "h6",
+  "strong",
+  "em",
+  "i",
+  "b",
+  "small",
+  "sub",
+  "sup",
+  "blockquote",
+  "q",
+  "abbr",
+  "cite",
+  "code",
+  "pre",
+  "ul",
+  "ol",
+  "li",
+  "dl",
+  "dt",
+  "dd",
+  "a",
+  "nav",
+  "bdo",
+  "table",
+  "tr",
+  "th",
+  "td",
+  "thead",
+  "tbody",
+  "tfoot",
+  "caption",
+  "col",
+  "colgroup",
+  "form",
+  "input",
+  "button",
+  "select",
+  "option",
+  "label",
+  "textarea",
+  "fieldset",
+  "legend",
+  "optgroup",
+  "datalist",
+  "keygen",
+  "output",
+  "img",
+  "audio",
+  "video",
+  "iframe",
+  "object",
+  "embed",
+  "canvas",
+  "svg",
+  "math",
+  "details",
+  "summary",
+  "menu",
+  "command",
+  "menuitem",
+  "article",
+  "aside",
+  "figcaption",
+  "figure",
+  "footer",
+  "header",
+  "main",
+  "mark",
+  "nav",
+  "section",
+  "time",
 ];
 
 const tags = {};
-htmlTags.forEach(tagName => {
-  tags[tagName] = (options, ...children) => minivan.createElement(tagName, options, ...children);
+htmlTags.forEach((tagName) => {
+  tags[tagName] = (options, ...children) =>
+    minivan.createElement(tagName, options, ...children);
 });
 
 const minivan = {
@@ -53,7 +134,7 @@ const minivan = {
     // Set attributes, styles, and events
     if (options.attributes) {
       for (const [key, value] of Object.entries(options.attributes)) {
-        if (key === 'class') {
+        if (key === "class") {
           element.className = value;
         } else {
           element.setAttribute(key, value);
@@ -62,8 +143,8 @@ const minivan = {
     }
 
     // Set styles
-    if (options.style) {
-      for (const [property, value] of Object.entries(options.style)) {
+    if (options.styles) {
+      for (const [property, value] of Object.entries(options.styles)) {
         element.style[property] = value;
       }
     }
@@ -76,20 +157,20 @@ const minivan = {
     }
 
     // Replace {variable} placeholders in text content
-    if (options.content && typeof options.content === 'string') {
-        const text = minivan.interpolate`${options.content}${children.join('')}`;
-        const textNode = document.createTextNode(text);
-        element.appendChild(textNode);
+    if (options.content && typeof options.content === "string") {
+      const text = minivan.interpolate`${options.content}${children.join("")}`;
+      const textNode = document.createTextNode(text);
+      element.appendChild(textNode);
     }
 
     // Append children
-    children.forEach(child => {
+    children.forEach((child) => {
       if (Array.isArray(child)) {
         // Recursively handle nested arrays
-        child.forEach(subChild => {
+        child.forEach((subChild) => {
           if (subChild instanceof HTMLElement) {
             element.appendChild(subChild);
-          } else if (typeof subChild === 'string') {
+          } else if (typeof subChild === "string") {
             element.appendChild(document.createTextNode(subChild));
           } else {
             console.error(`Invalid child type: ${subChild}`);
@@ -97,7 +178,7 @@ const minivan = {
         });
       } else if (child instanceof HTMLElement) {
         element.appendChild(child);
-      } else if (typeof child === 'string') {
+      } else if (typeof child === "string") {
         element.appendChild(document.createTextNode(child));
       } else {
         console.error(`Invalid child type: ${child}`);
@@ -112,12 +193,14 @@ const minivan = {
     if (parent) {
       parent.appendChild(child);
     } else {
-      console.error(`Parent element with selector "${parentSelector}" not found.`);
+      console.error(
+        `Parent element with selector "${parentSelector}" not found.`
+      );
     }
   },
 
   // HTML tags
-  tags: tags
+  tags: tags,
 
   // ... (existing code)
 };

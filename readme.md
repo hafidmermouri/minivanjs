@@ -28,6 +28,8 @@ To create a new HTML element, you can use this syntax:
 
 `div(__options__, __children__)`
 
+### **options**:
+
 Where `__options__` is of elements that will be used to create your html element. Options include:
 
 ```json
@@ -38,17 +40,30 @@ options: {
 }
 ```
 
-### Attributes:
+#### Attributes:
 
 Are attributes that would be added to your HTML Tag. When it has a `class` as a key like this `element.className = value`, then it will create a class element, otherwise it will create an attribute using the key as in this example: `element.setAttribute(key, value)`
 
-### Style:
+#### Style:
 
 Could be any css styling.
 
-### events:
+#### events:
 
 Will add an event listner to your html element. Please use `click` as an event name if you want to create an `onclick` event and give it a function as a callback handler.
+
+### **children**:
+
+It can be plain text. In this case, it will be added as the element html content. Example: `p({ attributes: { class: "test" } }, "Hello World!");`
+It can also be another html element or a list of html elements. Like in this example: `p(
+        { attributes: { class: "test" } },
+        span({ styles: { color: "red" } }, "Hello World in Red!")
+      )`
+
+## Attach the html element to the DOM
+
+After creating any HTML Element, it needs to be attached to the DOM. This will be achieved by using the `add` function of the framework:
+`minivan.add(__cssSelector__, __html_element__)`
 
 ## Creating a div:
 
