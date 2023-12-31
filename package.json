@@ -1,0 +1,23 @@
+{
+  "name": "minivanjs",
+  "version": "1.0.0",
+  "description": "Minivan is a minimalistic JavaScript framework that simplifies the creation of HTML elements and enhances DOM manipulation. It provides a clean and intuitive interface for building dynamic web content.",
+  "main": "dist/minivan.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hafidmermouri/minivanjs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hafidmermouri/minivanjs/issues"
+  },
+  "homepage": "https://github.com/hafidmermouri/minivanjs#readme",
+  "dependencies": {
+    "uglify-js": "^3.17.4"
+  }
+}
