@@ -18,6 +18,19 @@
       );
       minivan.add("#parentContainer", p_span);
 
+      const clickme_btn = button(
+        {
+          attributes: { id: "myButtonID" },
+          events: {
+            click: () => {
+              console.log("button has been clicked!");
+            },
+          },
+        },
+        "Click me"
+      );
+      minivan.add("#parentContainer", clickme_btn);
+
       // Example usage: Create a table with fake data
       const FakeTable = () => {
         const tableData = [

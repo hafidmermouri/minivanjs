@@ -52,6 +52,14 @@ Could be any css styling.
 
 Will add an event listner to your html element. Please use `click` as an event name if you want to create an `onclick` event and give it a function as a callback handler.
 
+Example
+
+```
+button({attributes : {id: 'myButtonID'}, events: {click: ()=> {
+  console.log('button has been clicked!')
+}}}, 'Click me')
+```
+
 ### **children**:
 
 It can be plain text. In this case, it will be added as the element html content. Example: `p({ attributes: { class: "test" } }, "Hello World!");`
