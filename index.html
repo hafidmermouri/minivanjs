@@ -1,5 +1,6 @@
 <html>
   <head>
+    <!--<script src="https://cdn.jsdelivr.net/gh/hafidmermouri/minivanjs@0.2/dist/minivan.min.js"></script>-->
     <script src="app.js"></script>
   </head>
   <body>
@@ -43,7 +44,7 @@
           { attributes: { border: "1" } },
           tr({}, th({}, "Name"), th({}, "Age"), th({}, "City")),
           ...tableData.map((row) =>
-            tr({}, td({}, row.name), td({}, "" + row.age), td({}, row.city))
+            tr({}, td({}, row.name), td({}, row.age), td({}, row.city))
           )
         );
       };

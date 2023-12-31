@@ -157,9 +157,13 @@ const minivan = {
     }
 
     // Replace {variable} placeholders in text content
-    if (options.content && typeof options.content === "string") {
+    if (
+      options.content &&
+      (typeof options.content === "string" ||
+        typeof options.content === "number")
+    ) {
       const text = minivan.interpolate`${options.content}${children.join("")}`;
-      const textNode = document.createTextNode(text);
+      const textNode = document.createTextNode(text.toString());
       element.appendChild(textNode);
     }
 
@@ -170,7 +174,10 @@ const minivan = {
         child.forEach((subChild) => {
           if (subChild instanceof HTMLElement) {
             element.appendChild(subChild);
-          } else if (typeof subChild === "string") {
+          } else if (
+            typeof subChild === "string" ||
+            typeof subChild === "number"
+          ) {
             element.appendChild(document.createTextNode(subChild));
           } else {
             console.error(`Invalid child type: ${subChild}`);
@@ -178,7 +185,7 @@ const minivan = {
         });
       } else if (child instanceof HTMLElement) {
         element.appendChild(child);
-      } else if (typeof child === "string") {
+      } else if (typeof child === "string" || typeof child === "number") {
         element.appendChild(document.createTextNode(child));
       } else {
         console.error(`Invalid child type: ${child}`);
