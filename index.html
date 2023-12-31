@@ -51,8 +51,8 @@
       // Add the fake table to a parent container
       minivan.add("#parentContainer", FakeTable());
 
-      // Example usage:
-      const dynamicText = minivan.state("World");
+      // Example usage of state management:
+
       let dynamicCount = minivan.state(0);
 
       const incrementClickHandler = () => {
@@ -65,25 +65,25 @@
         console.log("deccremented  > ", dynamicCount.getState());
       };
 
-      const incrementBtnContent = () =>
-        `Increment (${dynamicCount.getState()})`;
-      const decrementBtnContent = () =>
-        `Increment (${dynamicCount.getState()})`;
+      const valueContent = () => {
+        return `Value: (${dynamicCount.getState()})`;
+      };
       const incrementBtn = button(
         { events: { click: incrementClickHandler } },
-        incrementBtnContent()
+        "Increment"
       );
       const decrementBtn = button(
         { events: { click: decrementClickHandler } },
-        decrementBtnContent()
+        "Decrement"
       );
 
+      const counterDiv = div({}, valueContent());
       minivan.add("#parentContainer", incrementBtn);
       minivan.add("#parentContainer", decrementBtn);
+      minivan.add("#parentContainer", counterDiv);
       // Subscribe to changes in state and update the button content
       dynamicCount.subscribe((newState) => {
-        incrementBtn.textContent = incrementBtnContent();
-        decrementBtn.textContent = decrementBtnContent();
+        counterDiv.textContent = valueContent();
       });
       /*
 const IncrementClick = () => {
@@ -111,7 +111,7 @@ const minusBtn = button({events: {onclick: decrementClick}}, 'Decrement')
 
 minivan.add('#parentContainer', minusBtn)
 */
-
+      const dynamicText = minivan.state("wold!");
       const myDiv = div(
         { attributes: { id: "myDiv" } },
         minivan.interpolate`Hello, ${dynamicText}!`
