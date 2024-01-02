@@ -30,9 +30,9 @@ To create a new HTML element, you can use this syntax:
 
 ### **options**:
 
-Where `__options__` is of elements that will be used to create your html element. Options include:
+`__options__` contains all attributes, styles or events that a given element needs to carry. It will be used to create your html element. Options include:
 
-```json
+```js
 options: {
   'attributes': {},
   'styles': {},
@@ -62,8 +62,8 @@ button({attributes : {id: 'myButtonID'}, events: {click: ()=> {
 
 ### **children**:
 
-It can be plain text. In this case, it will be added as the element html content. Example: `p({ attributes: { class: "test" } }, "Hello World!");`
-It can also be another html element or a list of html elements. Like in this example: `p(
+It can be plain text or HTML Elements. In the first case, it will be added as content text. Example: `p({ attributes: { class: "test" } }, "Hello World!");`
+In the case it's an HTML Element, then it will be parsed and added as a child element(s). See this example: `p(
         { attributes: { class: "test" } },
         span({ styles: { color: "red" } }, "Hello World in Red!")
       )`
@@ -72,6 +72,8 @@ It can also be another html element or a list of html elements. Like in this exa
 
 After creating any HTML Element, it needs to be attached to the DOM. This will be achieved by using the `add` function of the framework:
 `minivan.add(__cssSelector__, __html_element__)`
+
+# Some examples:
 
 ## Creating a div:
 
@@ -83,8 +85,8 @@ minivan.add('#cssSelector',myDiv);
 ## Creating a p (paragraph):
 
 ```js
-const mySpan = span({}, "This is a span element.");
-minivan.add("#cssSelector", mySpan);
+const myoaragraph = p({}, "This is a P element.");
+minivan.add("#cssSelector", myoaragraph);
 ```
 
 ## Creating a span:
@@ -154,9 +156,8 @@ const decrementBtn = button(
 );
 
 // Append buttons to the parent container
-const parentContainer = document.getElementById("parentContainer");
-parentContainer.appendChild(incrementBtn);
-parentContainer.appendChild(decrementBtn);
+minivan.add("#parentContainer", incrementBtn);
+minivan.add("#parentContainer", decrementBtn);
 ```
 
 In this example, we use the minivan.state function to create a state, and two buttons that update the state when clicked. The state changes are logged to the console.
